@@ -1,1 +1,20 @@
+# Arduino
+*.o
+*.obj
+*.elf
+*.hex
 
+# Arduino IDE
+*.ino.eep
+
+# macOS
+.DS_Store
+
+# Windows
+Thumbs.db
+
+# VS Code
+.vscode/
+
+# PlatformIO
+.pio/

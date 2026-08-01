@@ -1507,3 +1507,175 @@ Versão atual da biblioteca:
 ```
 
 Esta versão representa o estado atual do desenvolvimento da biblioteca no momento da publicação deste documento.
+## Estrutura do projeto
+
+A biblioteca está organizada de acordo com a estrutura padrão utilizada por bibliotecas Arduino.
+
+A estrutura atual do projeto é:
+
+```text
+CU205SCPB-Arduino/
+│
+├── examples/
+│   └── ...
+│
+├── src/
+│   ├── CU205SCPB.cpp
+│   ├── CU205SCPB.h
+│   └── CU205SCPB_Commands.h
+│
+├── library.properties
+├── LICENSE
+└── README.md
+```
+
+---
+
+### `src/`
+
+A pasta `src` contém os arquivos principais da biblioteca.
+
+---
+
+### `src/CU205SCPB.h`
+
+Arquivo de cabeçalho principal da biblioteca.
+
+Contém:
+
+* definição da classe `CU205SCPB`;
+* declaração das funções públicas;
+* constantes de configuração;
+* definição dos pinos internos;
+* controle do estado interno da biblioteca.
+
+A classe principal é:
+
+```cpp
+class CU205SCPB : public Print
+```
+
+---
+
+### `src/CU205SCPB.cpp`
+
+Contém a implementação das funções declaradas no arquivo `CU205SCPB.h`.
+
+É neste arquivo que estão implementadas as funções responsáveis por:
+
+* inicialização do display;
+* envio de dados;
+* controle do cursor;
+* controle de brilho;
+* modos de operação;
+* efeitos de texto;
+* rolagem;
+* barra de progresso.
+
+---
+
+### `src/CU205SCPB_Commands.h`
+
+Contém as definições relacionadas aos comandos utilizados pela biblioteca para comunicação com o controlador do display.
+
+A separação dos comandos em um arquivo próprio facilita a manutenção e a evolução futura do projeto.
+
+---
+
+### `examples/`
+
+A pasta `examples` contém exemplos de utilização da biblioteca.
+
+Os exemplos permitem testar individualmente as principais funções do display e servem como referência para o desenvolvimento de novos projetos.
+
+Exemplos podem incluir funcionalidades como:
+
+* inicialização;
+* escrita de texto;
+* controle do cursor;
+* brilho;
+* rolagem;
+* efeitos de texto;
+* barra de progresso.
+
+Os exemplos podem ser acessados diretamente pelo Arduino IDE através do menu:
+
+```text
+Arquivo
+→ Exemplos
+→ CU205SCPB
+```
+
+---
+
+### `library.properties`
+
+Arquivo utilizado pelo Arduino IDE para identificar e gerenciar as informações da biblioteca.
+
+Esse arquivo contém informações como:
+
+* nome da biblioteca;
+* versão;
+* autor;
+* descrição;
+* categoria;
+* URL do projeto;
+* requisitos da biblioteca.
+
+A versão atual da biblioteca é:
+
+```text
+1.3.2
+```
+
+---
+
+### `README.md`
+
+É o arquivo principal de documentação do projeto.
+
+Ele apresenta informações sobre:
+
+* descrição da biblioteca;
+* instalação;
+* primeiro exemplo;
+* funções disponíveis;
+* conexão do hardware;
+* compatibilidade;
+* estrutura do projeto;
+* informações de utilização.
+
+---
+
+### `LICENSE`
+
+Define os termos legais de utilização, modificação e distribuição do código da biblioteca.
+
+Os usuários devem consultar este arquivo para conhecer as condições de uso do projeto.
+
+---
+
+### Organização da biblioteca
+
+A separação entre código-fonte, exemplos e documentação facilita a manutenção do projeto.
+
+De forma simplificada:
+
+```text
+src/
+    Código da biblioteca
+
+examples/
+    Exemplos de utilização
+
+library.properties
+    Informações da biblioteca
+
+README.md
+    Documentação
+
+LICENSE
+    Termos de licença
+```
+
+Essa estrutura segue o modelo utilizado por bibliotecas Arduino e facilita a instalação e utilização do projeto.

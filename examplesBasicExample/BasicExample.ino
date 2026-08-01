@@ -1,7 +1,7 @@
 #include <CU205SCPB.h>
 
 const uint8_t dataPins[8] = {
-2, 3, 4, 5, 6, 7, 8, 9
+    2, 3, 4, 5, 6, 7, 8, 9
 };
 
 const uint8_t WR_PIN = 10;
@@ -11,16 +11,13 @@ CU205SCPB vfd(dataPins, WR_PIN, CS_PIN);
 
 void setup()
 {
-vfd.begin();
+    vfd.begin();
 
-```
-vfd.clear();
+    vfd.clear();
 
-vfd.setCursor(0);
+    vfd.setCursor(0);
 
-vfd.print("HELLO WORLD");
-```
-
+    vfd.print("HELLO WORLD");
 }
 
 void loop()

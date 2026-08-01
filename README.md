@@ -1081,3 +1081,149 @@ Ambas permitem configurar:
 * pausa entre repetições.
 
 A implementação dessas funções pode ser utilizada para criar mensagens de status, avisos, títulos e informações maiores que os 20 caracteres disponíveis no display.
+## Barra de progresso
+
+A biblioteca disponibiliza uma função para apresentar visualmente o progresso de uma operação utilizando a largura disponível do display.
+
+---
+
+### `progressBar(uint8_t percent)`
+
+Exibe uma barra de progresso correspondente ao percentual informado.
+
+Parâmetro:
+
+* `percent` — percentual de progresso, de `0` a `100`.
+
+Uso:
+
+```cpp id="p3k7vx"
+vfd.progressBar(50);
+```
+
+Neste exemplo, a barra representa aproximadamente 50% do progresso.
+
+---
+
+### Exemplo básico
+
+```cpp id="h8m2qz"
+#include <CU205SCPB.h>
+
+const uint8_t dataPins[8] = {
+    2, 3, 4, 5, 6, 7, 8, 9
+};
+
+const uint8_t WR_PIN = 10;
+const uint8_t CS_PIN = 11;
+
+CU205SCPB vfd(dataPins, WR_PIN, CS_PIN);
+
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.progressBar(50);
+}
+
+void loop()
+{
+}
+```
+
+---
+
+### Atualizando o progresso
+
+A função pode ser chamada várias vezes para atualizar o percentual apresentado.
+
+Exemplo:
+
+```cpp id="s6v1nd"
+void loop()
+{
+    for (uint8_t percent = 0; percent <= 100; percent++)
+    {
+        vfd.progressBar(percent);
+
+        delay(100);
+    }
+}
+```
+
+Neste exemplo, o progresso é atualizado gradualmente de `0%` até `100%`.
+
+---
+
+### Exemplo com etapas
+
+A barra também pode ser utilizada para representar diferentes etapas de uma operação.
+
+```cpp id="k9x4br"
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.progressBar(0);
+
+    delay(1000);
+
+    vfd.progressBar(25);
+
+    delay(1000);
+
+    vfd.progressBar(50);
+
+    delay(1000);
+
+    vfd.progressBar(75);
+
+    delay(1000);
+
+    vfd.progressBar(100);
+}
+
+void loop()
+{
+}
+```
+
+Esse tipo de utilização pode ser aplicado em processos como inicialização de equipamentos, carregamento de dados, execução de tarefas ou qualquer operação que possa ser representada por um percentual.
+
+---
+
+### Faixa de valores
+
+A função utiliza um valor percentual entre:
+
+```cpp id="e5r2kw"
+0
+```
+
+e:
+
+```cpp id="u7m3qc"
+100
+```
+
+Onde:
+
+* `0` representa o início do progresso;
+* `50` representa aproximadamente metade do progresso;
+* `100` representa o progresso completo.
+
+Exemplo:
+
+```cpp id="v2n8fy"
+vfd.progressBar(0);    // 0%
+vfd.progressBar(25);   // 25%
+vfd.progressBar(50);   // 50%
+vfd.progressBar(75);   // 75%
+vfd.progressBar(100);  // 100%
+```
+
+> **Nota:** A aparência visual da barra de progresso depende da implementação utilizada pela biblioteca e dos caracteres disponíveis no display VFD.

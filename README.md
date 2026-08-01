@@ -713,3 +713,181 @@ vfd.scrollMode();
 A escolha do modo deve ser feita antes da escrita do texto que dependerá desse comportamento.
 
 > **Nota:** Os modos de operação controlam o comportamento interno do display. Eles são diferentes das funções de efeitos e rolagem implementadas pela biblioteca, como `scrollText()` e `marquee()`.
+## Efeitos e funções de texto
+
+A biblioteca disponibiliza funções para criar efeitos de escrita, centralizar textos e produzir efeitos de pisca-pisca.
+
+---
+
+### `typeWriter(const char *text, uint16_t speed)`
+
+Escreve um texto no display caractere por caractere, criando um efeito semelhante ao de uma máquina de escrever.
+
+Parâmetros:
+
+* `text` — texto que será exibido.
+* `speed` — intervalo entre a escrita de cada caractere, em milissegundos.
+
+Uso:
+
+```cpp id="x5n3p2"
+vfd.typeWriter("HELLO WORLD", 100);
+```
+
+Neste exemplo, cada caractere será escrito com um intervalo de aproximadamente `100 ms`.
+
+Exemplo:
+
+```cpp id="r7g1ab"
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.typeWriter("HELLO WORLD", 100);
+}
+```
+
+Um valor menor de `speed` produz uma escrita mais rápida.
+
+Um valor maior produz uma escrita mais lenta.
+
+---
+
+### `typeWriterCentered(const char *text, uint16_t speed)`
+
+Escreve o texto caractere por caractere utilizando um efeito de máquina de escrever e posiciona o texto de forma centralizada no display.
+
+Parâmetros:
+
+* `text` — texto que será exibido.
+* `speed` — intervalo entre a escrita de cada caractere, em milissegundos.
+
+Uso:
+
+```cpp id="x8p2kc"
+vfd.typeWriterCentered("HELLO WORLD", 100);
+```
+
+Exemplo:
+
+```cpp id="z1m4qr"
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.typeWriterCentered("HELLO WORLD", 100);
+}
+```
+
+Esta função é útil para mensagens de apresentação, telas de inicialização e interfaces que precisam apresentar uma mensagem centralizada com efeito de escrita progressiva.
+
+---
+
+### `center(const char *text)`
+
+Centraliza um texto na linha do display.
+
+Parâmetro:
+
+* `text` — texto que será exibido.
+
+Uso:
+
+```cpp id="q9s5lm"
+vfd.center("HELLO WORLD");
+```
+
+Exemplo:
+
+```cpp id="k4v7ps"
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.center("HELLO WORLD");
+}
+```
+
+Como o display possui 20 posições, a função calcula automaticamente a posição inicial necessária para centralizar o texto.
+
+Essa função é especialmente útil para títulos e mensagens de status.
+
+---
+
+### `blinkText(const char *text, uint16_t interval, uint8_t times)`
+
+Exibe um texto com efeito de pisca-pisca.
+
+Parâmetros:
+
+* `text` — texto que será exibido.
+* `interval` — intervalo entre os estados ligado e desligado, em milissegundos.
+* `times` — quantidade de vezes que o texto irá piscar.
+
+Uso:
+
+```cpp id="v3k6pd"
+vfd.blinkText("WARNING", 500, 3);
+```
+
+Neste exemplo, o texto `WARNING` pisca com um intervalo de `500 ms`, durante `3` ciclos.
+
+Exemplo:
+
+```cpp id="w8n2fz"
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.blinkText("WARNING", 500, 3);
+}
+```
+
+---
+
+### Exemplo combinado
+
+As funções de texto podem ser utilizadas em diferentes etapas de uma interface.
+
+Exemplo:
+
+```cpp id="n6r1vs"
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    // Exibe uma mensagem centralizada
+    vfd.center("CU205SCPB");
+
+    delay(2000);
+
+    // Limpa o display
+    vfd.clear();
+
+    // Escreve caractere por caractere
+    vfd.typeWriterCentered("HELLO WORLD", 100);
+
+    delay(2000);
+
+    // Exibe uma mensagem piscando
+    vfd.clear();
+
+    vfd.blinkText("READY", 500, 3);
+}
+
+void loop()
+{
+}
+```
+
+Esse exemplo demonstra como combinar diferentes funções da biblioteca para criar uma sequência simples de apresentação no display.

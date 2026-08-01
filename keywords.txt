@@ -1,1 +1,22 @@
-
+CU205SCPB	KEYWORD1
+begin	KEYWORD2
+clear	KEYWORD2
+home	KEYWORD2
+setCursor	KEYWORD2
+setBrightness	KEYWORD2
+cursorOn	KEYWORD2
+cursorOff	KEYWORD2
+backspace	KEYWORD2
+tab	KEYWORD2
+carriageReturn	KEYWORD2
+getCursorPosition	KEYWORD2
+autoReturnMode	KEYWORD2
+overwriteMode	KEYWORD2
+scrollMode	KEYWORD2
+typeWriter	KEYWORD2
+typeWriterCentered	KEYWORD2
+center	KEYWORD2
+blinkText	KEYWORD2
+scrollText	KEYWORD2
+marquee	KEYWORD2
+progressBar	KEYWORD2

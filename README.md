@@ -1385,3 +1385,125 @@ Total de sinais digitais utilizados:
 ```
 
 A configuração dos pinos pode ser alterada no programa conforme a necessidade do projeto.
+## Compatibilidade e requisitos
+
+A biblioteca `CU205SCPB` foi desenvolvida para facilitar a utilização do display VFD Noritake CU205SCPB-T21A através de microcontroladores compatíveis com a plataforma Arduino.
+
+---
+
+### Hardware testado
+
+A biblioteca foi desenvolvida e validada utilizando:
+
+* Display VFD Noritake CU205SCPB-T21A
+* Arduino UNO
+* Interface paralela de 8 bits
+
+O funcionamento foi validado em hardware real durante o desenvolvimento da biblioteca.
+
+---
+
+### Interface de comunicação
+
+A versão atual utiliza:
+
+* Interface paralela de 8 bits
+* 8 linhas de dados: `D0` a `D7`
+* Sinal `WR`
+* Sinal `CS`
+
+A biblioteca permite definir livremente os pinos utilizados pelo Arduino através do construtor:
+
+```cpp
+CU205SCPB(
+    const uint8_t p[8],
+    uint8_t wr,
+    uint8_t cs
+);
+```
+
+---
+
+### Plataforma Arduino
+
+A biblioteca foi desenvolvida utilizando a linguagem C++ e as APIs padrão da plataforma Arduino.
+
+A classe principal herda da classe `Print`:
+
+```cpp
+class CU205SCPB : public Print
+```
+
+Isso permite utilizar funções compatíveis com a interface `Print`, como:
+
+```cpp
+vfd.print("HELLO WORLD");
+```
+
+e:
+
+```cpp
+vfd.write('A');
+```
+
+---
+
+### Requisitos
+
+Para utilizar a biblioteca são necessários:
+
+* Uma placa compatível com Arduino;
+* Um display Noritake CU205SCPB-T21A compatível com a interface paralela utilizada;
+* 8 pinos digitais para as linhas de dados;
+* 1 pino digital para `WR`;
+* 1 pino digital para `CS`;
+* Alimentação adequada para o display;
+* Arduino IDE ou ambiente de desenvolvimento compatível com bibliotecas Arduino.
+
+---
+
+### Bibliotecas externas
+
+A biblioteca `CU205SCPB` utiliza apenas recursos padrão da plataforma Arduino.
+
+Não são necessárias bibliotecas externas adicionais para utilizar as funções básicas da biblioteca.
+
+A biblioteca utiliza:
+
+```cpp
+#include <Arduino.h>
+```
+
+e:
+
+```cpp
+#include <Print.h>
+```
+
+Esses arquivos fazem parte da plataforma Arduino.
+
+---
+
+### Compatibilidade com outras placas
+
+A biblioteca foi desenvolvida e testada inicialmente com Arduino UNO.
+
+Como a comunicação utiliza funções padrão da plataforma Arduino e permite configurar os pinos através do construtor, outras placas compatíveis podem ser utilizadas, desde que:
+
+* possuam pinos digitais suficientes;
+* operem em níveis elétricos compatíveis com o display;
+* sejam compatíveis com a API Arduino utilizada pela biblioteca.
+
+O funcionamento em outras plataformas não testadas deve ser validado pelo usuário antes da utilização em projetos definitivos.
+
+---
+
+### Versão atual
+
+Versão atual da biblioteca:
+
+```text
+1.3.2
+```
+
+Esta versão representa o estado atual do desenvolvimento da biblioteca no momento da publicação deste documento.

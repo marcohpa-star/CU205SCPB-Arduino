@@ -24,3 +24,41 @@ Driver desenvolvido para comunicação paralela de 8 bits utilizando o controlad
 - Efeito Marquee
 - Barra de progresso
 - Controle interno da posição do cursor
+## Hardware
+
+### Display
+
+Noritake CU205SCPB-T21A
+
+### Interface
+
+A biblioteca utiliza a interface paralela de 8 bits do display.
+
+São utilizados:
+
+- 8 linhas de dados: D0 a D7
+- WR — Write
+- CS — Chip Select
+
+### Pinagem do display
+
+O display utilizado no desenvolvimento possui o seguinte mapeamento de conexão:
+
+| Pino do display | Função |
+|---|---|
+| 1 | D7 |
+| 2 | D6 |
+| 3 | D5 |
+| 4 | D4 |
+| 5 | D3 |
+| 6 | D2 |
+| 7 | D1 |
+| 8 | D0 |
+| 9 | WR |
+| 10 | CS |
+| 11 | SIN/TO |
+| 12 | BUSY |
+| 13 | GND |
+| 14 | GND |
+| 15 | VCC |
+| 16 | VCC |

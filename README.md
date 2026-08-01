@@ -62,3 +62,24 @@ O display utilizado no desenvolvimento possui o seguinte mapeamento de conexão:
 | 14 | GND |
 | 15 | VCC |
 | 16 | VCC |
+## Instalação
+
+A biblioteca pode ser instalada através do Arduino IDE utilizando o arquivo ZIP disponível na seção de Releases deste repositório.
+
+### Instalação pelo Arduino IDE
+
+1. Baixe o arquivo ZIP da versão desejada na seção **Releases**.
+2. Abra o Arduino IDE.
+3. Acesse **Sketch → Incluir Biblioteca → Adicionar Biblioteca ZIP...**
+4. Selecione o arquivo ZIP baixado.
+5. A biblioteca será instalada automaticamente.
+
+Após a instalação, a biblioteca estará disponível em:
+
+**Sketch → Incluir Biblioteca**
+
+### Instalação manual
+
+Também é possível instalar a biblioteca manualmente copiando a pasta da biblioteca para o diretório `libraries` da instalação do Arduino IDE.
+
+Após a instalação, reinicie o Arduino IDE se a biblioteca não aparecer imediatamente na lista de bibliotecas disponíveis.

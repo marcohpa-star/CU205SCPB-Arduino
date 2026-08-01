@@ -891,3 +891,193 @@ void loop()
 ```
 
 Esse exemplo demonstra como combinar diferentes funções da biblioteca para criar uma sequência simples de apresentação no display.
+## Rolagem de texto
+
+A biblioteca possui funções para apresentar textos maiores que a largura disponível do display através de rolagem horizontal.
+
+O display CU205SCPB-T21A possui 20 posições de caracteres. Quando um texto ultrapassa essa largura, as funções de rolagem permitem apresentar todo o conteúdo de forma progressiva.
+
+---
+
+### `scrollText(const char *text, uint16_t speed, bool repeat, uint16_t pause)`
+
+Exibe um texto utilizando rolagem horizontal.
+
+A função permite controlar a velocidade da rolagem, definir se o texto deve ser repetido e configurar uma pausa entre as repetições.
+
+Parâmetros:
+
+* `text` — texto que será exibido.
+* `speed` — intervalo entre os movimentos da rolagem, em milissegundos.
+* `repeat` — define se a rolagem será repetida.
+* `pause` — tempo de pausa entre as repetições, em milissegundos.
+
+Os parâmetros `speed`, `repeat` e `pause` possuem valores padrão:
+
+```cpp
+speed = 250
+repeat = false
+pause = 1000
+```
+
+Isso permite utilizar a função de maneira simplificada.
+
+Exemplo:
+
+```cpp id="z7q2mh"
+vfd.scrollText("ESTE E UM TEXTO LONGO PARA O DISPLAY");
+```
+
+Neste caso, serão utilizados os valores padrão da função.
+
+---
+
+### Definindo a velocidade
+
+A velocidade da rolagem pode ser alterada através do parâmetro `speed`.
+
+Exemplo:
+
+```cpp id="j3r8vn"
+vfd.scrollText("TEXTO DESLIZANDO PELO DISPLAY", 100);
+```
+
+Um valor menor produz uma rolagem mais rápida.
+
+Um valor maior produz uma rolagem mais lenta.
+
+---
+
+### Rolagem sem repetição
+
+Para executar a rolagem uma única vez, utilize:
+
+```cpp id="m5k9wx"
+vfd.scrollText(
+    "MENSAGEM DE TESTE",
+    250,
+    false,
+    1000
+);
+```
+
+Neste exemplo, o texto é apresentado uma vez e a função termina após concluir a rolagem.
+
+---
+
+### Rolagem com repetição
+
+Para repetir continuamente a rolagem, utilize:
+
+```cpp id="p2v6cs"
+vfd.scrollText(
+    "MENSAGEM REPETITIVA",
+    250,
+    true,
+    1000
+);
+```
+
+O parâmetro `true` ativa a repetição.
+
+O parâmetro `pause` define o intervalo de espera entre uma repetição e outra.
+
+---
+
+### Exemplo completo
+
+```cpp id="a8d4qy"
+#include <CU205SCPB.h>
+
+const uint8_t dataPins[8] = {
+    2, 3, 4, 5, 6, 7, 8, 9
+};
+
+const uint8_t WR_PIN = 10;
+const uint8_t CS_PIN = 11;
+
+CU205SCPB vfd(dataPins, WR_PIN, CS_PIN);
+
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.scrollText(
+        "BEM VINDO AO DISPLAY CU205SCPB",
+        150,
+        false,
+        1000
+    );
+}
+
+void loop()
+{
+}
+```
+
+---
+
+### `marquee(const char *text, uint16_t speed, bool repeat, uint16_t pause)`
+
+Executa um efeito de letreiro (marquee) com o texto informado.
+
+Parâmetros:
+
+* `text` — texto que será exibido.
+* `speed` — intervalo entre os movimentos do texto, em milissegundos.
+* `repeat` — define se o efeito será repetido.
+* `pause` — tempo de pausa entre as repetições, em milissegundos.
+
+Uso:
+
+```cpp id="n4x8vt"
+vfd.marquee(
+    "CU205SCPB VFD DISPLAY",
+    150,
+    false,
+    1000
+);
+```
+
+Para repetir continuamente:
+
+```cpp id="h7c2kp"
+vfd.marquee(
+    "CU205SCPB VFD DISPLAY",
+    150,
+    true,
+    1000
+);
+```
+
+---
+
+### Diferença entre `scrollText()` e `marquee()`
+
+As duas funções são destinadas à apresentação de textos em movimento.
+
+A função:
+
+```cpp id="b6m1zs"
+scrollText()
+```
+
+é utilizada para realizar a rolagem de um texto pelo display.
+
+A função:
+
+```cpp id="c9q4ld"
+marquee()
+```
+
+é destinada a criar um efeito de letreiro.
+
+Ambas permitem configurar:
+
+* velocidade;
+* repetição;
+* pausa entre repetições.
+
+A implementação dessas funções pode ser utilizada para criar mensagens de status, avisos, títulos e informações maiores que os 20 caracteres disponíveis no display.

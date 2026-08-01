@@ -1679,3 +1679,99 @@ LICENSE
 ```
 
 Essa estrutura segue o modelo utilizado por bibliotecas Arduino e facilita a instalação e utilização do projeto.
+## Exemplos incluídos
+
+A biblioteca acompanha uma coleção de exemplos para demonstrar as principais funcionalidades do display VFD Noritake CU205SCPB-T21A.
+
+Os exemplos podem ser acessados no Arduino IDE através de:
+
+Arquivo → Exemplos → CU205SCPB
+
+### BasicTest
+
+Exemplo simples utilizado para verificar a comunicação básica entre o Arduino e o display.
+
+Demonstra:
+
+- Inicialização da biblioteca;
+- Limpeza do display;
+- Escrita de texto.
+
+---
+
+### CU205SCPB_01_HELLO_TEST
+
+Primeiro teste funcional da biblioteca.
+
+Demonstra:
+
+- Inicialização do display;
+- Posicionamento do cursor;
+- Escrita de mensagens.
+
+---
+
+### CU205SCPB_02_CURSOR_TEST
+
+Exemplo dedicado às funções de controle do cursor.
+
+Demonstra:
+
+- `setCursor()`
+- `cursorOn()`
+- `cursorOff()`
+- `getCursorPosition()`
+
+---
+
+### CU205SCPB_03_BRIGHTNESS_TEST
+
+Exemplo para teste dos níveis de brilho do display.
+
+Demonstra:
+
+- `setBrightness()`
+
+---
+
+### CU205SCPB_04_SCROLL_TEST
+
+Exemplo de rolagem horizontal de texto.
+
+Demonstra:
+
+- `scrollMode()`
+- `scrollText()`
+- `marquee()`
+
+---
+
+### CU205SCPB_05_CURSOR_CONTROL_TEST
+
+Exemplo com recursos avançados de movimentação do cursor.
+
+Demonstra:
+
+- `backspace()`
+- `tab()`
+- `carriageReturn()`
+
+---
+
+### CU205SCPB_06_PRINT_FORMAT_TEST
+
+Exemplo de utilização da interface `Print`.
+
+Demonstra:
+
+- `print()`
+- `write()`
+- Impressão de números e textos.
+
+---
+
+### CU205SCPB_07_FACTORY_TEST
+
+Exemplo completo para validação da biblioteca.
+
+Este exemplo reúne diversos recursos implementados durante o desenvolvimento e pode ser utilizado como teste geral do display.

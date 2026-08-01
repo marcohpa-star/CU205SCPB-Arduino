@@ -1227,3 +1227,161 @@ vfd.progressBar(100);  // 100%
 ```
 
 > **Nota:** A aparência visual da barra de progresso depende da implementação utilizada pela biblioteca e dos caracteres disponíveis no display VFD.
+## Conexão do hardware
+
+A biblioteca `CU205SCPB` utiliza a interface paralela de 8 bits do display Noritake CU205SCPB-T21A.
+
+O display também possui outros sinais disponíveis, porém a biblioteca utiliza os seguintes sinais para comunicação:
+
+* 8 linhas de dados (`D0` a `D7`)
+* `WR` — Write
+* `CS` — Chip Select
+
+A linha `BUSY` não é necessária para a configuração básica da comunicação utilizada pela biblioteca.
+
+---
+
+### Pinagem do conector
+
+A tabela abaixo apresenta a pinagem utilizada no display CU205SCPB-T21A:
+
+| Pino do display | Sinal  | Função                              |
+| --------------- | ------ | ----------------------------------- |
+| 1               | D7     | Dados bit 7                         |
+| 2               | D6     | Dados bit 6                         |
+| 3               | D5     | Dados bit 5                         |
+| 4               | D4     | Dados bit 4                         |
+| 5               | D3     | Dados bit 3                         |
+| 6               | D2     | Dados bit 2                         |
+| 7               | D1     | Dados bit 1                         |
+| 8               | D0     | Dados bit 0                         |
+| 9               | WR     | Write                               |
+| 10              | CS     | Chip Select                         |
+| 11              | SIN/TO | Entrada serial / função alternativa |
+| 12              | BUSY   | Sinal de ocupado                    |
+| 13              | GND    | Terra                               |
+| 14              | GND    | Terra                               |
+| 15              | VCC    | Alimentação                         |
+| 16              | VCC    | Alimentação                         |
+
+---
+
+### Interface paralela de 8 bits
+
+Para utilizar a biblioteca através da interface paralela, conecte as oito linhas de dados do Arduino às entradas correspondentes do display.
+
+A ordem dos pinos é:
+
+```text
+Display       Arduino
+-------------------------
+D0     -----> DATA[0]
+D1     -----> DATA[1]
+D2     -----> DATA[2]
+D3     -----> DATA[3]
+D4     -----> DATA[4]
+D5     -----> DATA[5]
+D6     -----> DATA[6]
+D7     -----> DATA[7]
+
+WR     -----> WR_PIN
+CS     -----> CS_PIN
+```
+
+Os pinos utilizados no Arduino podem ser escolhidos livremente, desde que sejam definidos corretamente no construtor da biblioteca.
+
+---
+
+### Exemplo de configuração
+
+No exemplo abaixo, os pinos digitais `2` a `9` são utilizados para os dados:
+
+```cpp
+const uint8_t dataPins[8] = {
+    2, 3, 4, 5, 6, 7, 8, 9
+};
+
+const uint8_t WR_PIN = 10;
+const uint8_t CS_PIN = 11;
+
+CU205SCPB vfd(dataPins, WR_PIN, CS_PIN);
+```
+
+A correspondência é:
+
+| Sinal do display | Pino Arduino |
+| ---------------- | ------------ |
+| D0               | 2            |
+| D1               | 3            |
+| D2               | 4            |
+| D3               | 5            |
+| D4               | 6            |
+| D5               | 7            |
+| D6               | 8            |
+| D7               | 9            |
+| WR               | 10           |
+| CS               | 11           |
+
+> **Importante:** A sequência do vetor `dataPins[]` deve corresponder à ordem `D0` até `D7`. Portanto, o primeiro elemento do vetor representa `D0` e o último representa `D7`.
+
+---
+
+### Alimentação
+
+As conexões de alimentação devem ser realizadas de acordo com as especificações elétricas do módulo e do fabricante.
+
+Conecte:
+
+```text
+Display
+----------------
+Pino 13  -> GND
+Pino 14  -> GND
+
+Pino 15  -> VCC
+Pino 16  -> VCC
+```
+
+> **⚠️ Atenção:** Verifique a tensão de alimentação especificada para o seu módulo CU205SCPB-T21A antes de realizar a conexão. Não conecte a alimentação apenas com base na numeração dos pinos. Consulte a documentação técnica do display utilizado.
+
+---
+
+### Sobre o sinal BUSY
+
+O display possui um sinal `BUSY` no pino 12.
+
+A versão atual da biblioteca utiliza uma comunicação baseada no envio dos comandos através das linhas de dados e dos sinais `WR` e `CS`, sem exigir a leitura do sinal `BUSY` para o funcionamento básico.
+
+Por esse motivo, o `BUSY` não precisa ser conectado para utilizar os exemplos básicos da biblioteca.
+
+---
+
+### Sobre o pino SIN/TO
+
+O pino 11 possui a identificação `SIN/TO` e está relacionado à interface serial ou a funções alternativas do display.
+
+A comunicação utilizada pela biblioteca nesta versão é a interface paralela de 8 bits. Portanto, esse pino não é utilizado nos exemplos de comunicação paralela apresentados neste projeto.
+
+---
+
+### Resumo da conexão
+
+Para utilizar a biblioteca no modo paralelo de 8 bits, são necessários:
+
+* 8 pinos digitais para `D0` a `D7`;
+* 1 pino digital para `WR`;
+* 1 pino digital para `CS`;
+* GND;
+* VCC.
+
+Total de sinais digitais utilizados:
+
+```text
+8 pinos de dados
++ 1 WR
++ 1 CS
+------------
+10 pinos digitais
+```
+
+A configuração dos pinos pode ser alterada no programa conforme a necessidade do projeto.

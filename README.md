@@ -83,3 +83,34 @@ Após a instalação, a biblioteca estará disponível em:
 Também é possível instalar a biblioteca manualmente copiando a pasta da biblioteca para o diretório `libraries` da instalação do Arduino IDE.
 
 Após a instalação, reinicie o Arduino IDE se a biblioteca não aparecer imediatamente na lista de bibliotecas disponíveis.
+## Primeiro exemplo
+
+O exemplo abaixo inicializa o display e escreve o texto `HELLO WORLD` na primeira posição do display.
+
+```cpp
+#include <CU205SCPB.h>
+
+const uint8_t dataPins[8] = {
+    2, 3, 4, 5, 6, 7, 8, 9
+};
+
+const uint8_t WR_PIN = 10;
+const uint8_t CS_PIN = 11;
+
+CU205SCPB vfd(dataPins, WR_PIN, CS_PIN);
+
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.setCursor(0);
+
+    vfd.print("HELLO WORLD");
+}
+
+void loop()
+{
+}
+> **Nota:** Os números dos pinos utilizados no exemplo são apenas uma configuração de exemplo. Os pinos podem ser alterados conforme a montagem utilizada, desde que os oito pinos de dados, WR e CS sejam definidos corretamente no construtor da biblioteca.

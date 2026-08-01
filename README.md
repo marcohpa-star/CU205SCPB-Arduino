@@ -114,3 +114,241 @@ void loop()
 {
 }
 > **Nota:** Os números dos pinos utilizados no exemplo são apenas uma configuração de exemplo. Os pinos podem ser alterados conforme a montagem utilizada, desde que os oito pinos de dados, WR e CS sejam definidos corretamente no construtor da biblioteca.
+
+
+
+## Funções disponíveis
+
+A biblioteca `CU205SCPB` disponibiliza funções para inicialização, controle do display, gerenciamento do cursor, modos de operação, efeitos de texto, rolagem e barra de progresso.
+
+---
+
+### Informações do display
+
+A biblioteca possui constantes que informam as dimensões do display:
+
+```cpp
+CU205SCPB::DISPLAY_WIDTH
+```
+
+Retorna a largura do display em caracteres.
+
+Para o CU205SCPB-T21A:
+
+```cpp
+20
+```
+
+Exemplo:
+
+```cpp
+uint8_t largura = CU205SCPB::DISPLAY_WIDTH;
+```
+
+---
+
+```cpp
+CU205SCPB::DISPLAY_HEIGHT
+```
+
+Retorna a quantidade de linhas do display.
+
+Para o CU205SCPB-T21A:
+
+```cpp
+1
+```
+
+Exemplo:
+
+```cpp
+uint8_t altura = CU205SCPB::DISPLAY_HEIGHT;
+```
+
+---
+
+### `begin()`
+
+Inicializa a comunicação entre o Arduino e o display VFD.
+
+Uso:
+
+```cpp
+vfd.begin();
+```
+
+Deve ser chamada no `setup()` antes de utilizar as demais funções da biblioteca.
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+}
+```
+
+---
+
+### `clear()`
+
+Limpa o conteúdo do display.
+
+Uso:
+
+```cpp
+vfd.clear();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.print("HELLO");
+}
+```
+
+---
+
+### `home()`
+
+Retorna o cursor para a posição inicial do display.
+
+Uso:
+
+```cpp
+vfd.home();
+```
+
+Exemplo:
+
+```cpp
+vfd.setCursor(10);
+
+vfd.print("TESTE");
+
+vfd.home();
+
+vfd.print("INICIO");
+```
+
+---
+
+### `setCursor(uint8_t pos)`
+
+Posiciona o cursor em uma posição específica do display.
+
+O display possui 20 posições, numeradas de `0` a `19`.
+
+Parâmetro:
+
+* `pos` — posição do cursor.
+
+Exemplo:
+
+```cpp
+vfd.setCursor(0);
+vfd.print("INICIO");
+```
+
+Para escrever na última posição:
+
+```cpp
+vfd.setCursor(19);
+vfd.print("X");
+```
+
+---
+
+### `setBrightness(uint8_t value)`
+
+Define o nível de brilho do display.
+
+Parâmetro:
+
+* `value` — valor de brilho utilizado pela biblioteca.
+
+Exemplo:
+
+```cpp
+vfd.setBrightness(5);
+```
+
+O valor disponível depende da faixa de brilho implementada pela biblioteca e pelo controlador do display.
+
+---
+
+### `print()`
+
+A biblioteca é derivada da classe `Print` do Arduino. Isso permite utilizar a função `print()` para enviar textos e outros dados compatíveis com a interface `Print`.
+
+Exemplo:
+
+```cpp
+vfd.print("HELLO WORLD");
+```
+
+Também é possível utilizar valores numéricos:
+
+```cpp
+vfd.print(123);
+```
+
+E textos combinados:
+
+```cpp
+vfd.print("TEMP: ");
+vfd.print(25);
+vfd.print(" C");
+```
+
+---
+
+### `write()`
+
+A função `write()` envia um caractere individual para o display.
+
+Ela é utilizada internamente pela interface `Print` e permite que funções como `print()` funcionem normalmente.
+
+Exemplo:
+
+```cpp
+vfd.write('A');
+```
+
+Também pode ser utilizada para enviar caracteres individualmente:
+
+```cpp
+vfd.write('H');
+vfd.write('E');
+vfd.write('L');
+vfd.write('L');
+vfd.write('O');
+```
+
+---
+
+### Versão da biblioteca
+
+A versão atual da biblioteca pode ser identificada através da constante:
+
+```cpp
+CU205SCPB_VERSION
+```
+
+Na versão atual:
+
+```cpp
+1.3.2
+```
+
+Exemplo:
+
+```cpp
+Serial.println(CU205SCPB_VERSION);
+```

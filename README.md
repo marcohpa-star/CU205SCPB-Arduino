@@ -579,3 +579,137 @@ void loop()
 ```
 
 Neste exemplo, o display é inicializado, o cursor é posicionado na posição `5`, o texto é escrito e a posição atual do cursor é enviada ao Monitor Serial.
+## Modos de operação
+
+A biblioteca disponibiliza três modos de operação para controlar o comportamento da escrita de texto no display.
+
+---
+
+### `autoReturnMode()`
+
+Ativa o modo de retorno automático.
+
+Neste modo, quando a escrita atinge o final da linha, o controlador do display retorna ao início da linha de acordo com o comportamento definido pelo display.
+
+Uso:
+
+```cpp
+vfd.autoReturnMode();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.autoReturnMode();
+
+    vfd.print("HELLO WORLD");
+}
+```
+
+---
+
+### `overwriteMode()`
+
+Ativa o modo de sobrescrita.
+
+Neste modo, novos caracteres escritos sobre uma posição já ocupada substituem o conteúdo existente naquela posição.
+
+Uso:
+
+```cpp
+vfd.overwriteMode();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.overwriteMode();
+
+    vfd.setCursor(0);
+
+    vfd.print("HELLO");
+
+    vfd.setCursor(0);
+
+    vfd.print("ABCDE");
+}
+```
+
+Após a segunda escrita, os caracteres `ABCDE` substituem os caracteres que estavam anteriormente nas primeiras posições.
+
+---
+
+### `scrollMode()`
+
+Ativa o modo de rolagem horizontal do display.
+
+Neste modo, quando novos caracteres ultrapassam a área disponível do display, o conteúdo pode ser deslocado horizontalmente de acordo com o comportamento do controlador.
+
+Uso:
+
+```cpp
+vfd.scrollMode();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.scrollMode();
+
+    vfd.print("TEXTO MUITO LONGO PARA O DISPLAY");
+}
+```
+
+---
+
+### Exemplo de seleção de modo
+
+Os modos de operação podem ser selecionados conforme a necessidade da aplicação.
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    // Seleciona o modo de retorno automático
+    vfd.autoReturnMode();
+
+    vfd.print("TESTE");
+}
+```
+
+Para utilizar o modo de sobrescrita:
+
+```cpp
+vfd.overwriteMode();
+```
+
+Para utilizar o modo de rolagem:
+
+```cpp
+vfd.scrollMode();
+```
+
+A escolha do modo deve ser feita antes da escrita do texto que dependerá desse comportamento.
+
+> **Nota:** Os modos de operação controlam o comportamento interno do display. Eles são diferentes das funções de efeitos e rolagem implementadas pela biblioteca, como `scrollText()` e `marquee()`.

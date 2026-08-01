@@ -352,3 +352,230 @@ Exemplo:
 ```cpp
 Serial.println(CU205SCPB_VERSION);
 ```
+### Controle do cursor
+
+A biblioteca permite controlar a exibição do cursor, movimentá-lo e consultar sua posição atual.
+
+---
+
+### `cursorOn()`
+
+Ativa a exibição do cursor no display.
+
+Uso:
+
+```cpp
+vfd.cursorOn();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.cursorOn();
+
+    vfd.print("CURSOR ATIVO");
+}
+```
+
+---
+
+### `cursorOff()`
+
+Desativa a exibição do cursor no display.
+
+Uso:
+
+```cpp
+vfd.cursorOff();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.print("CURSOR DESATIVADO");
+
+    vfd.cursorOff();
+}
+```
+
+---
+
+### `backspace()`
+
+Move o cursor uma posição para trás.
+
+Uso:
+
+```cpp
+vfd.backspace();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.setCursor(5);
+
+    vfd.print("ABC");
+
+    vfd.backspace();
+
+    vfd.print("X");
+}
+```
+
+Neste exemplo, o caractere `X` será escrito na posição anterior à posição atual do cursor.
+
+---
+
+### `tab()`
+
+Avança o cursor para a próxima posição de tabulação.
+
+Uso:
+
+```cpp
+vfd.tab();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.print("A");
+
+    vfd.tab();
+
+    vfd.print("B");
+}
+```
+
+A movimentação exata depende do comportamento de tabulação implementado pelo controlador do display.
+
+---
+
+### `carriageReturn()`
+
+Retorna o cursor para o início da linha atual.
+
+Como o CU205SCPB-T21A possui uma única linha de 20 caracteres, o cursor retorna para a posição inicial.
+
+Uso:
+
+```cpp
+vfd.carriageReturn();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.setCursor(10);
+
+    vfd.print("TESTE");
+
+    vfd.carriageReturn();
+
+    vfd.print("INICIO");
+}
+```
+
+---
+
+### `getCursorPosition()`
+
+Retorna a posição atual do cursor mantida internamente pela biblioteca.
+
+Uso:
+
+```cpp
+uint8_t pos = vfd.getCursorPosition();
+```
+
+Exemplo:
+
+```cpp
+void setup()
+{
+    Serial.begin(9600);
+
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.setCursor(5);
+
+    Serial.print("Posicao atual: ");
+    Serial.println(vfd.getCursorPosition());
+}
+```
+
+O valor retornado representa a posição atual do cursor, considerando a numeração das posições do display de `0` a `19`.
+
+---
+
+### Exemplo completo de controle do cursor
+
+```cpp
+#include <CU205SCPB.h>
+
+const uint8_t dataPins[8] = {
+    2, 3, 4, 5, 6, 7, 8, 9
+};
+
+const uint8_t WR_PIN = 10;
+const uint8_t CS_PIN = 11;
+
+CU205SCPB vfd(dataPins, WR_PIN, CS_PIN);
+
+void setup()
+{
+    Serial.begin(9600);
+
+    vfd.begin();
+
+    vfd.clear();
+
+    vfd.setCursor(5);
+
+    vfd.print("HELLO");
+
+    Serial.print("Cursor: ");
+    Serial.println(vfd.getCursorPosition());
+
+    vfd.cursorOn();
+}
+
+void loop()
+{
+}
+```
+
+Neste exemplo, o display é inicializado, o cursor é posicionado na posição `5`, o texto é escrito e a posição atual do cursor é enviada ao Monitor Serial.
